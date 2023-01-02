@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>The Game Of Bagels</title>
+
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width,intial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+
+      rel="stylesheet"
+
+    />
+
+    <style type="text/css" media="all">
+
+      * {
+
+        margin: 0px;
+
+        padding: 0px;
+
+      }
+
+      body {
+
+        background-color: black;
+
+      }
+
+      #wrapper {
+
+        overflow-x: hidden;
+
+        overflow-y: scroll;
+
+        height: 470px;
+
+      }
+
+      .title {
+
+        color: white;
+
+        font-weight: bold;
+
+        text-align: center;
+
+        margin: 20px;
+
+        margin-bottom: 60px;
+
+        font-size: 16px;
+
+        font-family: "Poppins", sans-serif;
+
+      }
+
+      #title {
+
+        background: linear-gradient(-85deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+
+        background-size: 400% 400%;
+
+        animation: gradient 15s ease infinite;
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        font-family: "Poppins", sans-serif;
+
+      }
+
+      #title:hover {
+
+        text-decoration: underline;
+
+      }
+
+      @keyframes gradient {
+
+        0% {
+
+          background-position: 0% 50%;
+
+        }
+
+        50% {
+
+          background-position: 100% 50%;
+
+        }
+
+        100% {
+
+          background-position: 0% 50%;
+
+        }
+
+      }
+
+      #counter {
+
+        position: fixed;
+
+        height: 60px;
+
+        width: 60px;
+
+        background-color: white;
+
+        bottom: 90px;
+
+        font-family: "Poppins", sans-serif;
+
+        right: 20px;
+
+        color: black;
+
+        font-size: 40px;
+
+        box-sizing: border-box;
+
+        padding: 3px;
+
+        border-radius: 50%;
+
+        text-align: center;
+
+        font-weight: bold;
+
+      }
+
+      .box {
+
+        font-family: "Poppins", sans-serif;
+
+        height: 40px;
+
+        box-sizing: border-box;
+
+        width: 200px;
+
+        background-color: white;
+
+        margin: 20px;
+
+        border-radius: 20px;
+
+        text-align: center;
+
+        font-size: 16px;
+
+        padding: 9px;
+
+        font-weight: bold;
+
+      }
+
+      .prompt {
+
+        font-family: "Poppins", sans-serif;
+
+        display: flex;
+
+        position: fixed;
+
+        bottom: 10px;
+
+        flex-direction: row;
+
+        border-radius: 20px;
+
+        padding: 0px;
+
+        width: 100vw;
+
+      }
+
+      .btn {
+
+        font-family: "Poppins", sans-serif;
+
+        background-color: white;
+
+        width: 80px;
+
+        height: 40px;
+
+        box-sizing: border-box;
+
+        font-weight: bold;
+
+        text-align: center;
+
+        margin: 15px;
+
+        padding: 9px;
+
+        font-size: 16px;
+
+        border-radius: 20px;
+
+      }
+
+      .input {
+
+        font-family: "Poppins", sans-serif;
+
+        height: 40px;
+
+        box-sizing: border-box;
+
+        width: 280px;
+
+        background-color: white;
+
+        margin: 15px;
+
+        border-radius: 20px;
+
+        text-align: left;
+
+        font-size: 16px;
+
+        padding: 10px;
+
+        font-weight: bold;
+
+      }
+
+      .btn:active {
+
+        opacity: 0.8;
+
+      }
+
+      .response {
+
+        display: flex;
+
+        flex-direction: row;
+
+        margin: 21px;
+
+        gap: 20px;
+
+      }
+
+      .bagle,
+
+      .pico,
+
+      .fermi {
+
+        font-family: "Poppins", sans-serif;
+
+        background-color: wheat;
+
+        border-radius: 15px;
+
+        text-align: center;
+
+        font-size: 12px;
+
+        padding: 7px;
+
+        font-weight: bold;
+
+        height: 15px;
+
+        width: 35px;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="title">
+
+      <h1>Game Of <span id="title">Bagels</span></h1>
+
+    </div>
+
+    <div id="counter">0</div>
+
+    <div id="wrapper">
+
+      <div class="box">Enter Your Number</div>
+
+      <div class="prompt">
+
+        <div id="input" class="input" contenteditable="true"></div>
+
+        <div id="btn" onclick="run()" class="btn">OK</div>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+
+      let val1 = Math.random() * 10;
+
+      val1 = val1.toFixed(0);
+
+      let val2 = Math.random() * 10;
+
+      val2 = val2.toFixed(0);
+
+      let val3 = Math.random() * 10;
+
+      val3 = val3.toFixed(0);
+
+      let ran = val1 + "" + val2 + "" + val3;
+
+      ran = ran.trim();
+
+      /*console.log(ran);
+
+      console.log(val1);
+
+      console.log(val2);
+
+      console.log(val3)*/
+
+      let input = document.getElementById("input");
+
+      let count = document.getElementById("counter");
+
+      let user_str;
+
+      let wrap = document.getElementById("wrapper");
+
+      let btn = document.getElementById("btn");
+
+      let counter = 0;
+
+      let createcount = 0;
+
+      let response;
+
+      function run() {
+
+        counter++;
+
+        console.log(counter);
+
+        count.innerText = counter;
+
+        user_str = input.innerText.trim();
+
+        console.log(user_str);
+
+        if (ran == user_str) {
+
+          alert("Congo Guessed It in " + counter + " turns");
+
+        }
+
+        if (counter != 10 && input.innerText != "") {
+
+          for (let i = 0; i < 3; i++) {
+
+            if (createcount == 0) {
+
+              response = document.createElement("div");
+
+              response.className = "response";
+
+              wrap.appendChild(response);
+
+            }
+
+            if (user_str[i] == ran[i]) {
+
+              console.log("fermi");
+
+              let fermi = document.createElement("div");
+
+              fermi.className = "fermi";
+
+              fermi.innerText = "fermi";
+
+              response.appendChild(fermi);
+
+              createcount++;
+
+            } else if (ran.includes(user_str[i])) {
+
+              let pico = document.createElement("div");
+
+              pico.className = "pico";
+
+              pico.innerText = "pico";
+
+              response.appendChild(pico);
+
+              console.log("pico");
+
+              createcount++;
+
+            } else {
+
+              let bagle = document.createElement("div");
+
+              bagle.className = "bagle";
+
+              bagle.innerText = "bagle";
+
+              response.appendChild(bagle);
+
+              console.log("bagle");
+
+              createcount++;
+
+            }
+
+          }
+
+          input.innerText = "";
+
+          if (createcount == 3) {
+
+            createcount = 0;
+
+          }
+
+        } else if (input.innerText == "") {
+
+          alert("Enter Number ");
+
+        } else {
+
+          alert("Oops Run Out Of Moves");
+
+        }
+
+        wrapper.scrollTop = wrapper.scrollHeight;
+
+      }
+
+    </script>
+
+  </body>
+
+</html>
+
